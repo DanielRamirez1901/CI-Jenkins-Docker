@@ -1,10 +1,4 @@
 pipeline {
-    agent {
-        dockerfile {
-            filename 'Dockerfile'
-            dir '.' // Reemplaza con la ubicación de tu Dockerfile
-        }
-    }
     
     stages {
         stage('Initialize') {
