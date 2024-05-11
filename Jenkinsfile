@@ -10,7 +10,7 @@ node {
 
     stage('Build image') {
   
-       app = docker.build("ventana1901/knote")
+       app = docker.build("ventana1901/knote:v1")
     }
 
     stage('Test image') {
