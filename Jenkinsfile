@@ -5,32 +5,39 @@ podTemplate(label: 'build', containers: [
     hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
   ]
 ) {
-    node('build') {
-        def app
+  node('build') {
+    container('docker') {
+      // Instalación de Docker
+      sh 'apt-get update && apt-get install -y docker.io'
+      // Verifica la instalación de Docker
+      sh 'docker --version'
 
-        stage('Clone repository') {
-            checkout scm
-        }
+      def app
 
-        stage('Build image') {
-            app = docker.build("ventana1901/knote")
-        }
+      stage('Clone repository') {
+          checkout scm
+      }
 
-        stage('Test image') {
-            app.inside {
-                sh 'echo "Tests passed"'
-            }
-        }
+      stage('Build image') {
+          app = docker.build("ventana1901/knote")
+      }
 
-        stage('Push image') {
-            docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                app.push("${env.BUILD_NUMBER}")
-            }
-        }
+      stage('Test image') {
+          app.inside {
+              sh 'echo "Tests passed"'
+          }
+      }
 
-        stage('Trigger ManifestUpdate') {
-            echo "triggering updatemanifestjob"
-            build job: 'updatemanifest', parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
-        }
-    }
+      stage('Push image') {
+          docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+              app.push("${env.BUILD_NUMBER}")
+          }
+      }
+
+      stage('Trigger ManifestUpdate') {
+          echo "triggering updatemanifestjob"
+          build job: 'updatemanifest', parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
+      }
+    }        
+  }  
 }
