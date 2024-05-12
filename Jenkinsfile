@@ -7,11 +7,7 @@ podTemplate(label: 'build', containers: [
 ) {
   node('build') {
     container('docker') {
-      // Instalación de Docker
-      sh 'apt-get update && apt-get install -y docker.io'
-      // Verifica la instalación de Docker
-      sh 'docker --version'
-
+  
       def app
 
       stage('Clone repository') {
