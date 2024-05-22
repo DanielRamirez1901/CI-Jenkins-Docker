@@ -1,4 +1,4 @@
-# CI-Jenkins-Docke
+# CI-Jenkins-Docker
 
 <p align="center">
   <img src="./images/image1.png">
