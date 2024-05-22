@@ -1,0 +1,6 @@
+projectKey=CI-Jenkins-Docker
+serverUrl=http://localhost:9000
+serverVersion=10.5.1.90531
+dashboardUrl=http://localhost:9000/dashboard?id=CI-Jenkins-Docker
+ceTaskId=2a932eb3-54e7-46ee-b500-72f3e42cd84c
+ceTaskUrl=http://localhost:9000/api/ce/task?id=2a932eb3-54e7-46ee-b500-72f3e42cd84c
