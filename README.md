@@ -37,6 +37,12 @@ helm
 
 # Flujo de aplicación
 
+<p align="center">
+  <img src="./images/image21.png">
+</p>
+
+Podemos ver el flujo de la aplicacion en el que se comienza realizando un cambio en algun archivo del repositorio de CI, luego esto acciona el webhook asociado a jenkins el cual acciona el pipeline que añade un nuevo versionamiento a la imagen de Docker y la sube a un container registry el cual es Dockerhub, luego se invoca automaticamente el pipeline de CD el cual actualiza este versionamiento en el pod asociado al helm y luego, argoCD verifica dichos cambios y actualiza el servicio con la nueva imagen para añadir dicha version al pod de forma local. 
+
 # Jenkins
 ### Instalación Jenkins
 
